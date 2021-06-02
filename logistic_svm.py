@@ -1,8 +1,9 @@
 from preprocess_data import preprocessed_data
-from sklearn.model_selection import GridSearchCV, StratifiedKFold
+from sklearn.model_selection import GridSearchCV, StratifiedKFold, RandomizedSearchCV
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
-from sklearn import  metrics
+from sklearn import metrics
+from scipy.stats.distributions import uniform
 
 
 import pandas as pd
@@ -23,9 +24,13 @@ def LR_gridsearch():
   return grid
 
 def svm_gridsearch():
-  grid = SVC(C=0.01, gamma=0.0001, kernel='rbf')
+  param_distribution = {
+    'C': uniform(0.001, 0.1-0.001),
+    'gamma': uniform(0.0001, 2)
+  }
+  grid = RandomizedSearchCV(SVC(kernel='rbf'), param_distribution, random_state=0)
   grid.fit(X_train, y_train)
-  #print("SVC", grid.best_params_)
+  print("SVC", grid.best_params_)
   return grid
 
 model_lr = LR_gridsearch()
@@ -55,6 +60,14 @@ d = {'precision_score': precision_score,
      'f1_score': f1_score,
      'accuracy_score' : accuracy_score
      }
-df = pd.DataFrame(data=d, index=[0])
-df.insert(loc=0, column='Method', value=['LR' 'SVM'])
+df = pd.DataFrame(data=d, index=[0, 1])
+df.insert(loc=0, column='Method', value=['LR', 'SVM'])
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
 print(df)
+
+'''
+  Method  precision_score  recall_score  f1_score  accuracy_score
+0     LR            0.849         0.849     0.849           0.849
+1    SVM            0.799         0.799     0.799           0.799
+'''
