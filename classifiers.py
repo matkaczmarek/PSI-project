@@ -200,28 +200,26 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 print(df)
 
-# without preprocessed data
-'''
-                       Method  precision_score  recall_score  f1_score 
-0                         KNN         0.732283      0.420814  0.534483   
-1      DecisionTreeClassifier         0.733871      0.411765  0.527536   
-2           BaggingClassifier         0.734177      0.524887  0.612137   
-3      RandomForestClassifier         0.734694      0.488688  0.586957   
-4        ExtraTreesClassifier         0.768000      0.434389  0.554913   
-5          AdaBoostClassifier         0.721212      0.538462  0.616580   
-6  GradientBoostingClassifier         0.672515      0.520362  0.586735   
-7               XGBClassifier         0.732484      0.520362  0.608466 
-'''
 
 # with preprocessed data
 '''
-                       Method  precision_score  recall_score  f1_score
-0                         KNN         0.780142      0.516432  0.621469   
-1      DecisionTreeClassifier         0.736111      0.497653  0.593838   
-2           BaggingClassifier         0.781690      0.521127  0.625352   
-3      RandomForestClassifier         0.793893      0.488263  0.604651   
-4        ExtraTreesClassifier         0.750000      0.366197  0.492114   
-5          AdaBoostClassifier         0.771812      0.539906  0.635359   
-6  GradientBoostingClassifier         0.798611      0.539906  0.644258   
-7               XGBClassifier         0.793750      0.596244  0.680965 
+                       Method  precision_score  recall_score  f1_score  
+0                         KNN         0.754545      0.354701  0.482558   
+1      DecisionTreeClassifier         0.628788      0.354701  0.453552   
+2           BaggingClassifier         0.666667      0.410256  0.507937   
+3      RandomForestClassifier         0.716418      0.410256  0.521739   
+4        ExtraTreesClassifier         0.741935      0.294872  0.422018   
+5          AdaBoostClassifier         0.692810      0.452991  0.547804   
+6  GradientBoostingClassifier         0.631285      0.482906  0.547215   
+7               XGBClassifier         0.641304      0.504274  0.564593  
+
+   accuracy_score  roc_auc_score  
+0           0.822       0.790258  
+1           0.800       0.797873  
+2           0.814       0.817860  
+3           0.824       0.830053  
+4           0.811       0.819704  
+5           0.825       0.834678  
+6           0.813       0.824881  
+7           0.818       0.820145 
 '''

@@ -69,16 +69,10 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 print(df)
 
-# without preprocessed data
-'''
-  Method  precision_score  recall_score  f1_score  accuracy_score
-0     LR            0.849         0.849     0.849           0.849
-1    SVM            0.799         0.799     0.799           0.799
-'''
 
-# with preprocessed data
+# 5000 samples
 '''
   Method  precision_score  recall_score  f1_score  accuracy_score
-0     LR            0.888         0.888     0.888           0.888
-1    SVM            0.816         0.816     0.816           0.816
+0     LR            0.807         0.807     0.807           0.807
+1    SVM            0.741         0.741     0.741           0.741
 '''

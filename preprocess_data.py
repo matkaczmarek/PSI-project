@@ -68,10 +68,11 @@ def preprocessed_data(verbose=False):
 
   df.dropna(inplace=True)
 
-  y = df['RainTomorrow'][:num_of_samples]
+  #df = df.sample(n=num_of_samples)
+  y = df['RainTomorrow']
   del df['RainTomorrow']
 
-  X = df.head(num_of_samples)
+  X = df
   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20)
 
   return X_train, X_test, y_train, y_test
