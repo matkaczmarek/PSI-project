@@ -65,38 +65,38 @@ def complex_model(activation):
 
   model = Sequential()
   model.add(Dense(10, input_shape=(X_train.shape[1],)))
-  model.add(Activation(activation=activation))
   model.add(BatchNormalization())
+  model.add(Activation(activation=activation))
 
   model.add(Dense(128))
-  model.add(Activation(activation=activation))
   model.add(BatchNormalization())
-  model.add(Dropout(0.5))
+  model.add(Activation(activation=activation))
+  model.add(Dropout(0.3))
 
   model.add(Dense(256))
-  model.add(Activation(activation=activation))
   model.add(BatchNormalization())
-  model.add(Dropout(0.5))
+  model.add(Activation(activation=activation))
+  model.add(Dropout(0.3))
 
   model.add(Dense(128))
-  model.add(Activation(activation='sigmoid'))
   model.add(BatchNormalization())
-  model.add(Dropout(0.5))
+  model.add(Activation(activation=activation))
+  model.add(Dropout(0.3))
 
   model.add(Dense(64))
-  model.add(Activation(activation='sigmoid'))
   model.add(BatchNormalization())
-  model.add(Dropout(0.5))
+  model.add(Activation(activation=activation))
+  model.add(Dropout(0.3))
 
   model.add(Dense(32))
-  model.add(Activation(activation=activation))
   model.add(BatchNormalization())
-  model.add(Dropout(0.5))
+  model.add(Activation(activation=activation))
+  model.add(Dropout(0.3))
 
   model.add(Dense(10))
-  model.add(Activation(activation=activation))
   model.add(BatchNormalization())
-  model.add(Dropout(0.5))
+  model.add(Activation(activation=activation))
+  model.add(Dropout(0.3))
 
   model.add(Dense(units=1, activation=activation))
 
@@ -106,24 +106,45 @@ def complex_model(activation):
   plot_history(history)
   print("COMPLEX MODEL:", model.evaluate(X_test, y_test))
 
+def random_search_model():
+  clear_session()
 
-basic_model()
+  model = Sequential()
+  model.add(Dense(117, activation="relu", input_shape=(X_train.shape[1],)))
+  model.add(Dense(117, activation="relu", input_shape=(X_train.shape[1],)))
+  model.add(Dense(117, activation="relu", input_shape=(X_train.shape[1],)))
+  model.add(Dense(units=1, activation='sigmoid'))
+
+  model.compile(loss="binary_crossentropy", optimizer="Adam", metrics=["accuracy"])
+
+  history = model.fit(X_train, y_train, epochs=100, validation_data=(X_test, y_test))
+  plot_history(history)
+  print("Random search model:", model.evaluate(X_test, y_test))
+
+#basic_model()
 # 5000 samples
 ''' 
 32/32 [==============================] - 0s 985us/step - loss: 0.4250 - accuracy: 0.8090
 BASIC MODEL: [0.42498987913131714, 0.8090000152587891]
 '''
 
-basic_model_with_regularizer()
+#basic_model_with_regularizer()
 '''
 32/32 [==============================] - 0s 1ms/step - loss: 0.4210 - accuracy: 0.8160
 BASIC MODEL WITH OPTIMIZER: [0.4209645688533783, 0.8159999847412109]
 '''
 
-complex_model('LeakyReLU')
+#complex_model('LeakyReLU')
 '''
 32/32 [==============================] - 0s 2ms/step - loss: 1.5078 - accuracy: 0.7790
 COMPLEX MODEL: [1.5077555179595947, 0.7789999842643738]
+'''
+
+random_search_model()
+
+'''
+32/32 [==============================] - 0s 682us/step - loss: 0.4107 - accuracy: 0.8190
+Random search model: [0.4106558561325073, 0.8190000057220459]
 '''
 
 #all samples
@@ -138,6 +159,11 @@ BASIC MODEL WITH OPTIMIZER: [0.3913284242153168, 0.829472005367279]
 '''
 
 '''
-910/910 [==============================] - 1s 1ms/step - loss: 0.4531 - accuracy: 0.8143
-COMPLEX MODEL: [0.45314860343933105, 0.8142788410186768]
+910/910 [==============================] - 1s 1ms/step - loss: 0.4531 - accuracy: 0.8307
+COMPLEX MODEL: [0.45314860343933105, 0.8307088410186768]
+'''
+
+'''
+910/910 [==============================] - 1s 892us/step - loss: 0.3790 - accuracy: 0.8345
+Random search model: [0.37904125452041626, 0.834524929523468]
 '''
